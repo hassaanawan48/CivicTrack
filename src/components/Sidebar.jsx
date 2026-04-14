@@ -12,7 +12,6 @@ function Sidebar({ filterStatus, onFilterChange }) {
     if (onFilterChange) {
       onFilterChange(status);
     }
-    // Optionally navigate to dashboard if not already there
     if (role === "authority" || role === "admin") {
       if (location.pathname !== "/admin") {
         navigate("/admin");
@@ -25,7 +24,7 @@ function Sidebar({ filterStatus, onFilterChange }) {
       <div className="sidebar-title">CivicTrack</div>
 
       <div className="sidebar-section">
-        
+        <div className="sidebar-section-header">Main</div>
         <div className="sidebar-links">
           {role === "citizen" && (
             <>
@@ -57,7 +56,6 @@ function Sidebar({ filterStatus, onFilterChange }) {
         </div>
       </div>
 
-      {/* Filter sections only for authority/admin */}
       {(role === "authority" || role === "admin") && (
         <div className="sidebar-section">
           <div className="sidebar-section-header">Filter by Status</div>
@@ -79,6 +77,12 @@ function Sidebar({ filterStatus, onFilterChange }) {
               onClick={() => handleFilterClick("resolved")}
             >
               Resolved
+            </button>
+            <button
+              className={`filter-link ${filterStatus === "rejected" ? "active-filter" : ""}`}
+              onClick={() => handleFilterClick("rejected")}
+            >
+              Rejected
             </button>
           </div>
         </div>
